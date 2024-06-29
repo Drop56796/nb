@@ -1,11 +1,16 @@
 local function removeUI()
-    local playerGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-    local doorESPUI = playerGui:FindFirstChild("DoorESPUI")
-    
-    if doorESPUI then
-        doorESPUI:Destroy()
-        print("UI Removed")
-    else
-        print("UI not found")
+    for _, door in pairs(workspace:GetDescendants()) do
+        if door:IsA("BasePart") and door.Name == "Door" then
+            local adornment = door:FindFirstChildOfClass("BoxHandleAdornment")
+            local billboard = door:FindFirstChildOfClass("BillboardGui")
+            
+            if adornment then
+                adornment:Destroy()
+            end
+            if billboard then
+                billboard:Destroy()
+            end
+        end
     end
+    print("All door ESPs removed")
 end
